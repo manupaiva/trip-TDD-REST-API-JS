@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import tripSchema from '../models/trip.model';
-
+import config from '../config';
 export const seed = async () => {
-  await mongoose.connect('mongodb://localhost:27017/tripsdb');
+  await mongoose.connect(config.DB_URI);
 
   await tripSchema.create({
     name: 'new trip',

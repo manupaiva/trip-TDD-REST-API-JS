@@ -2,6 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import config from './config';
 import { seed } from './utils/exampleTrips';
+import { router as indexRoute } from './routes/index';
+import { dbConnect } from './db';
 
 const app = express();
 
@@ -15,11 +17,8 @@ const server = app.listen(PORT, () => {
 });
 // seed();
 
-app.get('/api/v1', (req, res) => {
-  res.json({ message: 'Health check passed' });
-});
-app.get('/api/v1/trips', (req, res) => {
-  res.json({ message: 'Health check passed' });
-});
+dbConnect();
+
+app.use('/', indexRoute);
 
 export { app, server };
